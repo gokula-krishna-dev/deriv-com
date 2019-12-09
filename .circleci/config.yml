@@ -14,12 +14,12 @@ jobs:
       - run:
           command: npm run build
       - docker/build:
-          image: ${DOCKHUB_ORGANISATION}/deriv-com
+          image: ${DOCKHUB_ORGANISATION}/dev-deriv-com
       - docker/check
       - docker/push:
-          image: ${DOCKHUB_ORGANISATION}/deriv-com
+          image: ${DOCKHUB_ORGANISATION}/dev-deriv-com
       - k8s/install-kubectl
       - run:
           command: |
             echo $CA_CRT | base64 --decode > ca.crt
-            kubectl --server=${KUBE_SERVER} --certificate-authority=ca.crt --token=$SERVICEACCOUNT_TOKEN set image deployment/deriv-com deriv-com-container=${DOCKHUB_ORGANISATION}/deriv-com:${CIRCLE_SHA1}
+            kubectl --server=${KUBE_SERVER} --certificate-authority=ca.crt --token=$SERVICEACCOUNT_TOKEN set image deployment/dev-deriv-com dev-deriv-com-container=${DOCKHUB_ORGANISATION}/dev-deriv-com:${CIRCLE_SHA1}
