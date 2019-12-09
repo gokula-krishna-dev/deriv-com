@@ -8,6 +8,8 @@ jobs:
     steps:
       - checkout
       - run:
+          command: npm i
+      - run:
           command: npm run build
       - docker/build:
           image: ${DOCKHUB_ORGANISATION}/deriv-com
