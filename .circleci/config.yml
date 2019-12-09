@@ -1,12 +1,14 @@
 orbs:
   docker: circleci/docker@0.5.13
   k8s: circleci/kubernetes@0.7.0
+  node: circleci/node@1.1.6
 version: 2.1
 jobs:
   build:
     machine: true
     steps:
       - checkout
+      - node/install
       - run:
           command: npm i
       - run:
